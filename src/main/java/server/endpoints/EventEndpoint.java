@@ -84,8 +84,8 @@ public class EventEndpoint {
     @POST
     public Response createEvent(@HeaderParam("Authorization") String token, String eventData) throws SQLException {
 
-        eventData = gson.fromJson(eventData, String.class);
-        eventData = crypter.decrypt(eventData);
+       /* eventData = gson.fromJson(eventData, String.class);
+        eventData = crypter.decrypt(eventData)*/
 
         CurrentStudentContext student = tokenController.getStudentFromTokens(token);
         Student currentStudent = student.getCurrentStudent();
