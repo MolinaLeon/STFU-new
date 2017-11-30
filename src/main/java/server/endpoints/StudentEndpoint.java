@@ -124,7 +124,7 @@ public class StudentEndpoint {
         if (currentStudent != null) {
             String json = new Gson().toJson(currentStudent);
             String crypted = Crypter.encryptDecrypt(json);
-            Log.writeLog(getClass().getName(), this, "Current student found: " + currentStudent, 0);
+            Log.writeLog(getClass().getName(), this, "Current student found", 0);
             return Response
                     .status(200)
                     .type("application/json")
