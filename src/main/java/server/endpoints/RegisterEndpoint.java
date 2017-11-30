@@ -77,7 +77,7 @@ public class RegisterEndpoint {
                 String json = new Gson().toJson(registerStudent);
                 String crypted = Crypter.encryptDecrypt(json);
 
-                Log.writeLog(getClass().getName(), this, registerStudent + " registered", 0);
+                Log.writeLog(getClass().getName(), this,  "Student registered", 0);
                 return Response
                         .status(200)
                         .type("application/json")
