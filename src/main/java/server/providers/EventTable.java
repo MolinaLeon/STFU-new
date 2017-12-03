@@ -153,6 +153,7 @@ public class EventTable extends DBmanager {
 
     }
 
+
     /**
      *
      * @param event

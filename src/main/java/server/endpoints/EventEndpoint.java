@@ -236,20 +236,18 @@ public class EventEndpoint {
                 foundAttendingStudents = eventController.getAttendingStudents(idEvent);
                 // If student not found:
                 if (foundAttendingStudents.isEmpty()) {
-                    Log.writeLog(getClass().getName(), this, "No atten'ding students at event", 2);
+                    Log.writeLog(getClass().getName(), this, "No attending students at event", 2);
                     return Response
                             .status(400)
                             .type("plain/text")
                             .entity("No attending students")
                             .build();
                 } else {
-                    String json = new Gson().toJson(foundAttendingStudents);
-                    String crypted = Crypter.encryptDecrypt(json);
                     Log.writeLog(getClass().getName(), this, "Attending students fetched", 0);
                     return Response
                             .status(200)
                             .type("application/json")
-                            .entity(new Gson().toJson(crypted))
+                            .entity(foundAttendingStudents)
                             .build();
                 }
             }
@@ -264,6 +262,7 @@ public class EventEndpoint {
     }
 
     /**
+     * Rettet til med hjælp fra https://github.com/Pewtro/STFU-new/blob/master/src/main/java/server/endpoints/EventEndpoint.java
      *
      * @param token
      * @param eventJson
@@ -272,36 +271,23 @@ public class EventEndpoint {
      */
     @POST
     @Path("/join")
-    public Response joinEvent(@HeaderParam("Authorization") String token, String eventJson) throws SQLException {
+    public Response joinEvent(@HeaderParam("Authorization") String token, String eventJson) throws SQLException, ResponseException {
         CurrentStudentContext student = tokenController.getStudentFromTokens(token);
         Student currentStudent = student.getCurrentStudent();
         if (currentStudent != null) {
             Event event = gson.fromJson(eventJson, Event.class);
 
-            try {
-                eventController.joinEvent(event.getIdEvent(), currentStudent.getIdStudent());
+            eventController.joinEvent(event.getIdEvent(), currentStudent.getIdStudent());
 
-                String json = new Gson().toJson(event);
-                String crypted = Crypter.encryptDecrypt(json);
+            String json = gson.toJson(event);
 
-                Log.writeLog(getClass().getName(), this, "Event joined", 0);
-                return Response
-                        .status(200)
-                        .type("application/json")
-                        .entity(new Gson().toJson(crypted))
-                        .build();
+            Log.writeLog(getClass().getName(), this, "Event joined", 0);
+            return Response
+                    .status(200)
+                    .type("application/json")
+                    .entity(event)
+                    .build();
 
-            } catch (ResponseException e) {
-                ErrorMessage message = new ErrorMessage();
-                message.setError(e.getMessage());
-                message.setStatus(e.getStatus());
-                Log.writeLog(getClass().getName(), this, "Not able to join event", 2);
-                return Response
-                        .status(e.getStatus())
-                        .type("application/json")
-                        .entity(new Gson().toJson(message))
-                        .build();
-            }
         } else {
             return Response
                     .status(403)
