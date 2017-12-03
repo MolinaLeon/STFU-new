@@ -100,5 +100,18 @@ public class EventController {
         return updateEvent;
 
     }
+
+    /**
+     * Følgende er lånt fra https://github.com/Pewtro/STFU-new/blob/d9ec9cf5d63c6cdc0ec81dc4d74d04c164b0fdf8/src/main/java/server/controllers/EventController.java
+     *
+     * @return myEvents
+     */
+
+    public ArrayList<Event> getMyEvents(Student student) {
+        ArrayList getMyEvents = eventTable.getMyEvents(student);
+        eventTable.close();
+        return getMyEvents;
+    }
+
 }
 
