@@ -285,7 +285,7 @@ public class EventEndpoint {
             return Response
                     .status(200)
                     .type("application/json")
-                    .entity(event)
+                    .entity(json)
                     .build();
 
         } else {
@@ -298,7 +298,7 @@ public class EventEndpoint {
     }
 
     /**
-     * Følgende metode er lånt fra https://github.com/Pewtro/STFU-new/blob/master/src/main/java/server/endpoints/RegisterEndpoint.java
+     * Følgende metode er lånt fra https://github.com/Pewtro/STFU-new/blob/master/src/main/java/server/endpoints/EventEndpoint.java
      *
      * @param token
      * @return Responses
