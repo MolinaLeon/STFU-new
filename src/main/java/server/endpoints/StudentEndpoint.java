@@ -1,3 +1,5 @@
+//Ny kryptering er lavet med hjælp fra: https://github.com/Pewtro/STFU-new/blob/master/src/main/java/server/endpoints/EventEndpoint.java
+
 package server.endpoints;
 
 
@@ -21,6 +23,7 @@ public class StudentEndpoint {
 
     private StudentController studentController = new StudentController();
     private TokenController tokenController = new TokenController();
+    private Gson gson = new Gson();
 
     /**
      *
@@ -55,13 +58,13 @@ public class StudentEndpoint {
                             .entity("You are not attending any events")
                             .build();
                 } else {
-                    String json = new Gson().toJson(foundAttendingEvents);
-                    String crypted = Crypter.encryptDecrypt(json);
+                    String json = gson.toJson(foundAttendingEvents);
+
                     Log.writeLog(getClass().getName(), this, "Attending events fetched", 0);
                     return Response
                             .status(200)
                             .type("application/json")
-                            .entity(new Gson().toJson(crypted))
+                            .entity(Crypter.encrypt(json))
                             .build();
                 }
             }
@@ -122,13 +125,14 @@ public class StudentEndpoint {
         CurrentStudentContext student = tokenController.getStudentFromTokens(token);
         Student currentStudent = student.getCurrentStudent();
         if (currentStudent != null) {
-            String json = new Gson().toJson(currentStudent);
-            String crypted = Crypter.encryptDecrypt(json);
+
+            String json = gson.toJson(currentStudent);
+
             Log.writeLog(getClass().getName(), this, "Current student found", 0);
             return Response
                     .status(200)
                     .type("application/json")
-                    .entity(new Gson().toJson(crypted))
+                    .entity(Crypter.encrypt(json))
                     .build();
         } else {
             Log.writeLog(getClass().getName(), this, "Current student not found - 403", 2);
