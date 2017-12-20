@@ -8,9 +8,6 @@ import server.config.Config;
 
 public class Crypter {
 
-    // XOR-kypteringsmetoden: (CR)
-    //https://github.com/KyleBanks/XOREncryption/blob/master/Java%20(Android%20compatible)/XOREncryption.java
-
     /**
      * @param input
      * @return Input
