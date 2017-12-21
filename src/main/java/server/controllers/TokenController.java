@@ -17,17 +17,7 @@ public class TokenController {
     private StudentTable studentTable = new StudentTable();
 
 
-/*
-    // Metode til at modtage en token og sende et student objekt retur
-
-    public Student getStudentFromTokens(String token) throws SQLException {
-        Student student = st.getStudentFromToken(token);
-        st.close();
-        return student;
-    }
-*/
-
-    // Metode til at slette en token (eventuelt ved log ud)
+    // Metode til at slette en token
 
     /**
      *

@@ -68,7 +68,6 @@ public class RegisterEndpoint {
                 studentController.verifyStudentCreation(registerStudent.getFirstName(), registerStudent.getLastName(), registerStudent.getPassword(), registerStudent.getEmail(), registerStudent.getVerifyPassword());
             } catch (IllegalArgumentException ee) {
                 System.out.print(ee.getMessage());
-                //Bør måske ændres til at user ikke kunne verifies pga forkert info om fornavn, efternavn, kodeord eller email
                 Log.writeLog(getClass().getName(), this, "User couldn't be registered", 2);
                 return Response
                         .status(400)

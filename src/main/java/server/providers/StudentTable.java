@@ -66,7 +66,7 @@ public class StudentTable extends DBmanager {
      * @throws SQLException
      */
     public boolean addStudent(Student student) throws SQLException {
-        // Denne metode er taget fra henrik (Slack)
+        // Denne metode er taget fra Henrik (Slack)
         long unixTime = System.currentTimeMillis() / 1000L;
         //generer salt password
         student.setSalt(student.getEmail() + unixTime);
