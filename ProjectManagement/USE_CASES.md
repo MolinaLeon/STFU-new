@@ -11,7 +11,9 @@
 | Use case 5: | Se liste med events: |   x    |     |
 | Use case 6: | Se deltagerliste på valgte events: |   x    |     |
 | Use case 7: | Slette egne events: |   x    |     |
-| Use case 8: | Log ud: |   x    |     |
+| Use case 8: | Tilmelde sig events: |   x    |     |
+| Use case 9: | Se events man deltager i: |   x    |     |
+| Use case 10: | Log ud: |   x    |     |
 
 ## Use cases med beskrivelser
 
